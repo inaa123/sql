@@ -61,12 +61,12 @@ using (department_id)
 where d.manager_id = 100; -- 위랑다르게 접두사 붙이니 실행.
 --equi조인
 ---------------------------
-
+  
 select e.employee_id, e.last_name, e.department_id,
     d.department_id, d.location_id
 from employees e join departments d
 on (e.department_id = d.department_id); -- equi 조인
-
+  
 select employee_id, city, department_name
 from employees e join departments d
 on e.department_id = d.department_id
@@ -131,7 +131,71 @@ and e.employee_id <> c.employee_id
 order by 1, 2, 3;
 
 -- 과제] Davies보다 후에 입사한 사원들의 이름, 입사일을 조회하라.
-select e.last_name, e.hire_date, d.hire_date
+select e.last_name, e.hire_date
 from employees e join employees d
-on e.hire_date between d.min_hire_date and d.max_hire_date
-and d.last_name = 'Davies';
+on d.last_name = 'Davies'
+and e.hire_date > d.hire_date;
+
+--과제] 매니저보다 먼저 입사한 사원들의 이름, 입사일, 매니저명, 매니저입사일을 조회하라.
+select w.last_name, w.hire_date, m.last_name, m.hire_date
+from employees w join employees m
+on w.manager_id = m.employee_id -- 나의 매니저 찾기..
+and w.hire_date < m.hire_date;
+
+-----------------여기까지 inner join 끝.
+
+--inner join , 레코드를 내 테이블에 포함시키기
+select e.last_name, e.department_id, d.department_name
+from employees e join departments d
+on e.department_id = d.department_id;
+
+-- outer join
+select e.last_name, e.department_id, d.department_name
+from employees e left outer join departments d
+on e.department_id = d.department_id;
+
+select e.last_name, e.department_id, d.department_name
+from employees e right outer join departments d
+on e.department_id = d.department_id;
+
+select e.last_name, e.department_id, d.department_name
+from employees e full outer join departments d
+on e.department_id = d.department_id;
+
+-- 과제] 사원들의 이름, 사번, 매니저명, 매니저사번을 조회하라.
+--      king 사장도 테이블에 포함한다.
+select w.last_name, w.employee_id, m.last_name, m.employee_id
+from employees w left outer join employees m
+on w.manager_id = m.employee_id
+order by 2;
+--------------------------------------------
+
+select d.department_id, d.department_name, d.location_id, l.city
+from departments d, locations l
+where d.location_id = l.location_id
+and d.department_id in(20, 50);
+
+select e.last_name, d.department_name, l.city
+from employees e, departments d, locations l
+where e.department_id = d.department_id
+and d.location_id = l.location_id;
+
+--non equi join
+select e.last_name, e.salary, e.job_id
+from employees e, jobs j
+where e.salary between j.min_salary and j.max_salary
+and j.job_id = 'IT_PROG';
+
+select e.last_name, e.department_id, d.department_name
+from employees e, departments d
+where e.department_id(+) = d.department_id; --왼쪽에(+) right outer join
+
+--grant?나오게 하려면 left outer join 해야함
+select e.last_name, e.department_id, d.department_name
+from employees e, departments d
+where e.department_id = d.department_id(+); --오른쪽에(+), left outer join
+
+--self join
+select worker.last_name || ' works for ' ||manager.last_name
+from employees worker, employees manager
+where worker.manager_id = manager.employee_id;
