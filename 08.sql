@@ -51,6 +51,13 @@ union
 select location_id, null, state_province
 from locations;
 
+select employee_id, job_id, salary
+from employees
+union
+select employee_id, job_id
+from job_history
+order by salary;
+
 -- 과제] 위 문장을 persistence 관점에서 고쳐라. (데이터타입이 일치해야한다.)
 select employee_id, job_id, salary
 from employees

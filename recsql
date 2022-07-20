@@ -1,0 +1,10 @@
+SELECT * FROM RECYCLEBIN;
+FLASHBACK TABLE "BIN$v+/INgpIS6iAIwfAHoWRjw==$0" TO BEFORE DROP;
+DROP TABLE hire_date;
+FLASHBACK TABLE "BIN$sI9X0P+LQmqqQ57+IPaifg==$0" TO BEFORE DROP;
+
+select tname
+from tab;
+
+select *
+from hire_date;
