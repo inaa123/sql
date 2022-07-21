@@ -157,5 +157,10 @@ select job_id, sum(decode(department_id, 20, salary)) "20",
 from employees
 group by job_id;
     
-        
+
+ select sum(decode(department_id, 20, salary)) "20",
+      sum(decode(department_id, 50, salary)) "50",
+      sum(decode(department_id, 80, salary)) "80"
+ from employees
+  group by job_id;        
 

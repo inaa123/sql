@@ -122,6 +122,27 @@ where employee_id = 300;
 
 commit;
 -------------------------
+delete dept
+where department_id = 300;
+
+select *
+from dept;
+
+rollback;
+
+select *
+from dept;
+
+delete emp
+where department_id = (
+        select department_id
+        from departments
+        where department_name = 'Contraction');
+
+select *
+from emp;
+
+commit;
 
 drop table hire_dates;
 
@@ -145,5 +166,13 @@ commit;
 select *
 from hire_dates;
 --------------------
+create user you identified by you;
+grant connect, resource to you;
 
+select tname
+from tab;
+
+create table depts(
+department_id number(3) constraint depts_deptid_pk primary key,
+department_name varchar(20));
 

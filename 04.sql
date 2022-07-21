@@ -267,3 +267,5 @@ select last_name, hire_date,
         end gift
 from employees;
 -- 이전 앞에 값 포함, 후는 값포함x
+
+

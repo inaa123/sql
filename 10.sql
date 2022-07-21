@@ -1,3 +1,6 @@
+--SYSTEM은 스키마와 상관없이....데이터 조회?가능...?
+
+
 -- DDL (Data Definition Language)
 drop table hire_dates;
 
@@ -180,13 +183,13 @@ create table users(
 user_id number(3));
 desc users
 
-alter table users add(user_name varchar2(10));
+alter table users add(user_name varchar2(10)); -- 칼럼 추가
 desc users
 
-alter table users modify(user_name number(7));
+alter table users modify(user_name number(7)); --칼럼 수정
 desc users
 
-alter table users drop column user_name;
+alter table users drop column user_name; --칼럼삭제
 desc users
 ------------------------
 
@@ -200,4 +203,5 @@ alter table users read write; -- 읽기쓰기로 바꾸기
 insert into users values(2);
 
 commit;
+
 
